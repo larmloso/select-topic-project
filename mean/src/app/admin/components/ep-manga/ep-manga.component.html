@@ -1,0 +1,149 @@
+<app-navigations>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <mat-card *ngFor="let item of adminService._getOneEp">
+          <mat-card-header>
+            <mat-card-title>
+              Title name : {{ item.titlename}}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-header>
+              เรื่องย่อ : {{ item.discription }}
+            </mat-card-header>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button color="primary" [routerLink]="['/admin/edit-titlename/',item.bookid]" routerLinkActive="active" >Edit</button>
+            <button mat-button color="warn" (click)="deleteall(item)">Delete</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+
+      <div class="col-md-6">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              Totle : {{adminService._epmangacount}} Episode
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-header>
+              ลายละเอียด...
+            </mat-card-header>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button color="warn">Views</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+
+      <div class="col-md-12 mt-4">
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                New Episode
+              </mat-panel-title>
+              <mat-panel-description>
+                ...
+                <mat-icon>add</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>ชื่อตอน</mat-label>
+                    <input matInput type='text' name="epname" ngModel required #epname="ngModel">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>หมายเลขตอน </mat-label>
+                    <input matInput type='text' name="epnumber" ngModel required #epnumber="ngModel">
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+              <mat-form-field appearance="legacy" class="example-full-width mt-3">
+                <mat-label>เนื้อเรื่อง</mat-label>
+                <textarea matInput type='text' name="epdiscription" ngModel required #epdiscription="ngModel"></textarea>
+              </mat-form-field>
+
+              <div class="text-center mt-5">
+                <button mat-stroked-button color="primary" [disabled]='f.invalid'>add new episode <mat-icon>book
+                  </mat-icon>
+                </button>
+              </div>
+            </form>
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+      </div>
+
+      <div class="col-md-12 mt-4">
+
+
+
+
+          <mat-accordion class="example-headers-align mt-3" multi>
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  add manga
+                </mat-panel-title>
+                <mat-panel-description>
+                  new manga
+                  <mat-icon>add</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <table class="table table-borderless mt-3 text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">bookid</th>
+                    <th scope="col">Epname</th>
+                    <th scope="col">Epnumber</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of adminService._getAllepname; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{item.bookid}}</td>
+                    <td>{{item.epname}}</td>
+                    <td>{{item.epnumber}}</td>
+                    <td>
+                      <button mat-button color="primary" [routerLink]="['/admin/ep-manga/',item.bookid]"
+                        routerLinkActive="router-link-active" [routerLink]="['/admin/edit-epname/',item._id]" routerLinkActive="active">Edit</button>
+                      <button mat-button color="warn" (click)="epnameDel(item)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+
+        </div>
+
+      </div>
+
+      <div class="mb-5"></div>
+
+
+
+    </div>
+</app-navigations>

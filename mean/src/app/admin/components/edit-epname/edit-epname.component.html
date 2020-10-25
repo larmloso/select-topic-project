@@ -1,0 +1,53 @@
+<app-navigations>
+
+  <div class="container">
+
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            New Episode
+          </mat-panel-title>
+          <mat-panel-description>
+            ...
+            <mat-icon>add</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <form>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>ชื่อตอน</mat-label>
+                <input matInput type='text' name="epname" [(ngModel)]="epname">
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>หมายเลขตอน </mat-label>
+                <input matInput type='text' name="epnumber" [(ngModel)]="epnumber">
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <mat-form-field appearance="legacy" class="example-full-width mt-3">
+            <mat-label>เนื้อเรื่อง</mat-label>
+            <textarea matInput type='text' name="epdiscription" [(ngModel)]="epdiscription"></textarea>
+          </mat-form-field>
+
+          <div class="text-center mt-5">
+            <button mat-stroked-button color="primary" (click)="updateEpnaem()">update
+            </button>
+          </div>
+        </form>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+  <div class="mb-5"></div>
+
+</app-navigations>

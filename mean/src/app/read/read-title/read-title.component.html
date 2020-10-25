@@ -1,0 +1,24 @@
+<div class="container mgt">
+
+  <div class="row mt-4">
+    <div class="col-md-1"></div>
+    <article class="col-md-5 col-lg-3">
+      <div class="card-content">
+        <a class="spectrum-a"><img class="spectrum1"
+            src="https://image.freepik.com/free-vector/science-elements-with-test-tubes-and-molecules_23-2147491185.jpg"
+            alt="meow">
+        </a>
+      </div>
+    </article>
+    <div class="col-md-6">
+      <div class="row mt-4">
+        <H3>&nbsp; {{ titlename }}</H3>
+        <div class="col-md-12 mt-2" *ngFor="let item of adminService._getAllepname">
+          <a [routerLink]="['/read-ep', item._id]" routerLinkActive="active">ตอนที่ {{item.epnumber}}  &nbsp;&nbsp;&nbsp;
+            {{item.epname}}</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

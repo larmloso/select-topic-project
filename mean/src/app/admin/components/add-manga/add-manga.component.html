@@ -1,0 +1,155 @@
+<app-navigations>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mt-3">
+        <!-- <H3 class="mt-5">New Manga</H3> -->
+        <mat-accordion class="example-headers-align mt-3" multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                add manga
+              </mat-panel-title>
+              <mat-panel-description>
+                new manga
+                <mat-icon>add</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+              <mat-form-field appearance="outline" class="example-full-width mt-3">
+                <mat-label>ชื่อเรื่อง</mat-label>
+                <input matInput name="titlename" ngModel required #titlename="ngModel">
+              </mat-form-field>
+
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>bookid</mat-label>
+                    <input matInput type='text' name="bookid" ngModel required #bookid="ngModel">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>ประเภท</mat-label>
+                    <mat-select [(ngModel)]="selectedValue" name="types">
+                      <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <mat-form-field appearance="legacy" class="example-full-width mt-3">
+                <mat-label>เรื่องย่อ</mat-label>
+                <input matInput type='discription' name="discription" ngModel required #discription="ngModel">
+              </mat-form-field>
+
+              <div class="text-center mt-5">
+                <button mat-stroked-button color="primary" [disabled]='f.invalid'>New Manga <mat-icon>book</mat-icon>
+                </button>
+              </div>
+            </form>
+
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
+      <div class="col-md-4 mt-3">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>
+                  จำนานการ์ตูนทั้งหมด
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-card-actions align="center">
+                  <h1>{{adminService._mangacount}}</h1>
+                </mat-card-actions>
+              </mat-card-content>
+              <mat-card-actions align="end">
+                <button mat-button [routerLink]="['']" routerLinkActive="active" >Views</button>
+              </mat-card-actions>
+            </mat-card>
+
+          </div>
+          <div class="col-md-12 mt-4">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>
+                  จำนวนสมาชิกทั้งหมด
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-card-actions align="center">
+                  <h1>{{adminService._countalluser}}</h1>
+                </mat-card-actions>
+              </mat-card-content>
+              <mat-card-actions align="end">
+                <button mat-button [routerLink]="['/admin/member']" routerLinkActive="active" >Views</button>
+              </mat-card-actions>
+            </mat-card>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12 mt-5">
+
+        <mat-accordion class="example-headers-align mt-3" multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                All manga
+              </mat-panel-title>
+              <mat-panel-description>
+                ...
+                <mat-icon>add</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table class="table table-borderless mt-3 text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">id</th>
+                  <th scope="col">Titlename</th>
+                  <th scope="col">type</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of adminService._getAll; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item.bookid}}</td>
+                  <td>{{item.titlename}}</td>
+                  <td>{{item.types}}</td>
+                  <td>
+                    <button mat-button color="primary" [routerLink]="['/admin/ep-manga/',item.bookid]"
+                      routerLinkActive="router-link-active">รายละเอียด...</button>
+                    <button mat-button color="warn" (click)="titlenameDel(item)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
+
+    </div>
+
+    <div class="mb-5">
+
+    </div>
+  </div>
+
+
+
+</app-navigations>

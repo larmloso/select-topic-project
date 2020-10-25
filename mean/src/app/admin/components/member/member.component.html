@@ -1,0 +1,79 @@
+<app-navigations>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              สมาชิกทั้งหมด
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card-actions align="center">
+              <h1>{{adminService._countalluser}}</h1>
+            </mat-card-actions>
+          </mat-card-content>
+          <mat-card-actions align="end">
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+
+
+      <div class="col-md-12 mt-4">
+
+
+
+
+        <mat-accordion class="example-headers-align mt-3" multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                allmember
+              </mat-panel-title>
+              <mat-panel-description>
+                ...
+                <mat-icon>person</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table class="table table-borderless mt-3 text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">id</th>
+                  <th scope="col">username</th>
+                  <th scope="col">email</th>
+                  <th scope="col">status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of adminService._alluser; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item._id}}</td>
+                  <td>{{item.fullname}}</td>
+                  <td>{{item.email}}</td>
+                  <td>{{item.roles[0]}}</td>
+                  <td>
+                    <!-- <button mat-button color="primary" [routerLink]="['/admin/ep-manga']"
+                      routerLinkActive="router-link-active">Edit</button> -->
+                    <button mat-button color="warn" (click)="userDel(item)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
+
+    </div>
+
+    <div class="mb-5"></div>
+
+
+
+  </div>
+</app-navigations>
